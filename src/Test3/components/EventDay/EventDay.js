@@ -3,8 +3,6 @@ import { Button} from "antd";
 import { Link, useParams } from "react-router-dom";
 import EventList from "../EventList/EventList";
 import EventModal from "../EventModal/EventModal";
-import { Header } from "antd/es/layout/layout";
-
 
 export function EventDay (){
     const { date } = useParams()

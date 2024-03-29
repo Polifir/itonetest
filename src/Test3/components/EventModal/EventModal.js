@@ -1,6 +1,7 @@
-import { Button, Form, Modal } from "antd";
+import { Button, Form, Modal, notification } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import dayjs from 'dayjs'
 import { v4 as uuidv4 } from 'uuid'
 import EventForm from "../EventForm/EventForm";
 import { addEvent, editEvent } from "../../api/calendarApi";
@@ -32,8 +33,22 @@ const EventModal = ({ title ,date, initValue}) =>{
             }
             form.resetFields();
             setVisibleModal(false)
-        }
-        ).catch((e) =>e)      
+
+                        
+            const notificationTime = dayjs(values.startTime).subtract(10, 'minutes')
+            if (notificationTime.isAfter(dayjs())) {
+                const timeoutId = setTimeout(() => {
+                notification.info({
+                    message: 'Напоминание о мероприятие',
+                    description: `Через 10 минут начнется событие: ${values.title}`,
+                    duration: null,
+                })
+                }, notificationTime.diff(dayjs()))
+                return () => clearTimeout(timeoutId)
+            }
+
+
+  }).catch((e) =>e)      
     }
     return(
         <>

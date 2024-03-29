@@ -1,7 +1,6 @@
 import { Spin } from "antd"
 import { useGetServicesDetailsQuery } from "../../api/servicesApi"
 import { ErrorReq } from "../ErrorReq/ErrorReq"
-import { ServicesList } from "../ServicesList/ServicesList"
 import { useParams } from "react-router-dom"
 import { ServiceCard } from "../ServiceCard/ServiceCard"
 import style from "./ServiceCardDetails.module.css"

@@ -1,0 +1,33 @@
+li{
+    list-style: none;
+}
+
+.container{
+    list-style: none;
+    display: flex;
+    justify-content:  space-between;
+    gap: 1vw;
+    border:  2px solid #4096ff;
+    border-radius: 5px;
+    align-items: center;
+    padding: 1vw;
+    margin: 2vw;
+}
+
+.fullCard{
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px){
+    .container{
+        flex-direction: column;
+        align-items: center;
+
+    }
+    .fullCard{
+        flex-direction: column;
+        align-items: start;
+    }
+}

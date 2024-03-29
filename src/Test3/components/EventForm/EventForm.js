@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Button, Form, Input, Modal, TimePicker } from 'antd'
+import { Button, Form, Input, TimePicker } from 'antd'
 import dayjs from 'dayjs'
 const EventForm= ({ form, onSubmit, onCancel, initialData }) => {
   useEffect(() => {
