@@ -1,4 +1,4 @@
-import { Button, Form, Modal, notification } from "antd";
+import { Button, Form, Modal, message, notification } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import dayjs from 'dayjs'
@@ -34,6 +34,7 @@ const EventModal = ({ title ,date, initValue}) =>{
             form.resetFields();
             setVisibleModal(false)
 
+            message.success(`Событие успешно ${id ? 'обновлено' : 'добавлено'}`)
                         
             const notificationTime = dayjs(values.startTime).subtract(10, 'minutes')
             if (notificationTime.isAfter(dayjs())) {
