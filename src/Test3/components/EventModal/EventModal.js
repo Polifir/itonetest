@@ -1,0 +1,48 @@
+import { Button, Form, Modal } from "antd";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from 'uuid'
+import EventForm from "../EventForm/EventForm";
+import { addEvent, editEvent } from "../../api/calendarApi";
+
+const EventModal = ({ title ,date, initValue}) =>{
+    const dispatch = useDispatch()
+    const [visivbleModal, setVisibleModal] = useState(false)
+    const [form] = Form.useForm()
+    const id =  initValue !== undefined ? initValue.id : false;
+
+    const handleCancel = () => {
+        setVisibleModal(false);
+        form.resetFields();
+      };
+
+    const submitForm = () =>{
+        form.validateFields().then((values) => {
+            const newEvent = {
+                date,
+                event: {id: id || uuidv4(),
+                    title: values.title,
+                    startTime: values.startTime.format('HH:mm'),
+                    endTime: values.endTime.format('HH:mm'),}
+            }
+            if(id){
+                dispatch(editEvent(newEvent))
+            } else{
+                dispatch(addEvent(newEvent))
+            }
+            form.resetFields();
+            setVisibleModal(false)
+        }
+        ).catch((e) =>e)      
+    }
+    return(
+        <>
+        {!visivbleModal ? <Button onClick={() => setVisibleModal(true)}>{title}</Button> : 
+        <Modal title={title} open={visivbleModal} footer={null} onCancel={handleCancel}>
+            <EventForm onSubmit={submitForm} form={form} onCancel={handleCancel} initialData={initValue}/>
+        </Modal>}
+        </>
+    )
+}
+
+export default EventModal
